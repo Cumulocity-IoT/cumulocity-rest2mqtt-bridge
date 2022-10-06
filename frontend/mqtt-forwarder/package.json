@@ -1,0 +1,77 @@
+{
+  "name": "mqtt-forwarder",
+  "version": "1.0.5",
+  "description": "This is the Cumulocity module federation plugin to forward rest post request to a mqtt topic.",
+
+  "scripts": {
+    "start": "c8ycli server -u ${url}",
+    "start:admin": "npm start -- --shell administration",
+    "build": "c8ycli build",
+    "deploy": "c8ycli deploy -u ${url} --password ${password} --user ${user}",
+    "postinstall": "ngcc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/animations": "12.2.14",
+    "@angular/cdk": "12.2.13",
+    "@angular/common": "12.2.14",
+    "@angular/compiler": "12.2.14",
+    "@angular/core": "12.2.14",
+    "@angular/forms": "12.2.14",
+    "@angular/platform-browser": "12.2.14",
+    "@angular/platform-browser-dynamic": "12.2.14",
+    "@angular/router": "12.2.14",
+    "@angular/upgrade": "12.2.14",
+    "@c8y/client": "1014.0.143",
+    "@c8y/ngx-components": "1014.0.143",
+    "@c8y/style": "1014.0.143",
+    "@ngx-translate/core": "13.0.0",
+    "rxjs": "~6.6.3",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "12.2.14",
+    "@angular/compiler-cli": "12.2.14",
+    "@angular/language-service": "12.2.14",
+    "@angular/localize": "12.2.14",
+    "@angular/service-worker": "12.2.14",
+    "@c8y/cli": "1014.0.143",
+    "@types/jest": "^27.0.3",
+    "@types/webpack": "^5.28.0",
+    "file-loader": "^6.2.0",
+    "jest": "^27.4.5",
+    "jest-preset-angular": "^11.0.1",
+    "typescript": "4.2.4"
+  },
+  "c8y": {
+    "application": {
+      "name": "mqtt-forwarder",
+      "contextPath": "mqtt-forwarder",
+      "key": "mqtt-forwarder-application-key",
+      "globalTitle": "MQTT forwarder widget",
+      "tabsHorizontal": true,
+      "isPackage": true,
+      "noAppSwitcher": true,
+      "package": "plugin",
+      "exports": [
+        {
+          "name": "MQTT forwarder plugin",
+          "module": "MQTTForwarderModule",
+          "path": "./src/service-forwarder.module",
+          "description": "Adds a MQTT forwarder plugin"
+        }
+      ],
+      "remotes": {
+        "mqtt-forwarder": [
+          "MQTTForwarderModule"
+        ]
+      }
+    },
+    "cli": {}
+  },
+  "browserslist": [
+    "last 2 major versions"
+  ]
+}
