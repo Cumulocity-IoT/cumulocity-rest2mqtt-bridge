@@ -6,7 +6,7 @@
 Forward json payload send by POST request to a connected MQTT broker.
 The endpoint for POST requests is  ```{{url}}/service/mqtt-forwarder/payload/{topic}```.
 
-The connection to the MQTT broker is configured through the UI
+The connection to the MQTT broker is configured through the UI:
 ![Configue connection Microservice](resources/image/Forwarder_MQTT_Connection.png).
 
 ______________________
