@@ -93,8 +93,8 @@
               <label class="" translate>QOS</label>
               <div class="c8y-select-wrapper">
                 <select class="form-control" formControlName="qos" [(ngModel)]="configuration.qos" #qosRef>
-                  <option *ngFor="let q of keys(QOS)" [ngValue]="q">
-                    {{q}}
+                  <option *ngFor="let q of QOS | keyvalue" [ngValue]="q.key">
+                    {{q.value}}
                   </option>
                 </select>
               </div>

@@ -7,9 +7,9 @@ export enum Status {
 }
 
 export enum QOS {
-  AT_MOST_ONCE = "AT_MOST_ONCE",
-  AT_LEAST_ONCE = "AT_LEAST_ONCE", 
-  EXACTLY_ONCE = "EXACTLY_ONCE",
+  AT_MOST_ONCE = "At most once",
+  AT_LEAST_ONCE = "At least once", 
+  EXACTLY_ONCE = "Exactly once",
 }
 
 export interface MQTTAuthentication {
