@@ -1,6 +1,6 @@
 {
-  "name": "mqtt-forwarder",
-  "version": "1.0.5",
+  "name": "mqtt-forwarder-ui",
+  "version": "1.0.6",
   "description": "This is the Cumulocity module federation plugin to forward rest post request to a mqtt topic.",
 
   "scripts": {
@@ -47,9 +47,9 @@
   },
   "c8y": {
     "application": {
-      "name": "mqtt-forwarder",
-      "contextPath": "mqtt-forwarder",
-      "key": "mqtt-forwarder-application-key",
+      "name": "mqtt-forwarder-ui",
+      "contextPath": "mqtt-forwarder-ui",
+      "key": "mqtt-forwarder-ui-application-key",
       "globalTitle": "MQTT forwarder widget",
       "tabsHorizontal": true,
       "isPackage": true,
@@ -64,7 +64,7 @@
         }
       ],
       "remotes": {
-        "mqtt-forwarder": [
+        "mqtt-forwarder-ui": [
           "MQTTForwarderModule"
         ]
       }

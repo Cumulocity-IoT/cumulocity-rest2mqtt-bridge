@@ -4,7 +4,7 @@ import { gettext, NavigatorNode, NavigatorNodeFactory } from '@c8y/ngx-component
 
 @Injectable()
 export class ConfigurationNavigationFactory implements NavigatorNodeFactory {
-  private static readonly APPLICATION_MQTT_GENERIC = 'mqtt-forwarder';
+  private static readonly APPLICATION_NAME = 'mqtt-forwarder-ui';
 
   private readonly NAVIGATION_NODE_MQTT = new NavigatorNode({
     parent: gettext('Settings'),
@@ -19,7 +19,7 @@ export class ConfigurationNavigationFactory implements NavigatorNodeFactory {
 
   get() {
     return this.applicationService
-      .isAvailable(ConfigurationNavigationFactory.APPLICATION_MQTT_GENERIC)
+      .isAvailable(ConfigurationNavigationFactory.APPLICATION_NAME)
       .then((result) => {
         if (!(result && result.data)) {
           console.error('MQTT Generic Microservice not subscribed!');
