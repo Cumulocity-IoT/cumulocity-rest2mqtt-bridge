@@ -3,14 +3,14 @@ import { TabFactory, Tab } from '@c8y/ngx-components';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class ConfigurationTabFactory implements TabFactory {
+export class ForwarderConfigurationTabFactory implements TabFactory {
   constructor(public router: Router) {}
 
   get() {
     const tabs: Tab[] = [];
-    if (this.router.url.match(/mqttforwarder/g)) {
+    if (this.router.url.match(/forwarder/g)) {
       tabs.push({
-        path: 'mqttforwarder/configuration',
+        path: 'forwarder/configuration',
         priority: 1000,
         label: 'Configuration',
         icon: 'cog',

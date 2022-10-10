@@ -1,6 +1,6 @@
 {
   "name": "mqtt-forwarder-ui",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "description": "This is the Cumulocity module federation plugin to forward rest post request to a mqtt topic.",
 
   "scripts": {

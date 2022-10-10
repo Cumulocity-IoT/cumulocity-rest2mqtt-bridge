@@ -10,7 +10,7 @@ export class ConfigurationNavigationFactory implements NavigatorNodeFactory {
     parent: gettext('Settings'),
     label: gettext('MQTT Forwarder'),
     icon: 'forward1',
-    path: 'mqttforwarder/configuration',
+    path: 'forwarder/configuration',
     priority: 99,
     preventDuplicates: true,
   });

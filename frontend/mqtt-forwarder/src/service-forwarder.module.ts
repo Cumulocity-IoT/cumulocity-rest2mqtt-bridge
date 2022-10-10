@@ -15,7 +15,7 @@ import { BrokerConfigurationService } from './mqtt-configuration/broker-configur
 import { TerminateBrokerConnectionModalComponent } from './mqtt-configuration/terminate/terminate-connection-modal.component';
 import { ConfigurationNavigationFactory } from './navigation.factory';
 import { OverviewGuard } from './shared/overview.guard';
-import { ConfigurationTabFactory } from './tab.factory';
+import { ForwarderConfigurationTabFactory } from './tab.factory';
 
 @NgModule({
   imports: [
@@ -26,7 +26,7 @@ import { ConfigurationTabFactory } from './tab.factory';
     ReactiveFormsModule,
     RouterModule.forChild([
       {
-        path: 'mqttforwarder/configuration',
+        path: 'forwarder/configuration',
         pathMatch: 'full',
         component: BokerConfigurationComponent,
       },
@@ -48,12 +48,12 @@ import { ConfigurationTabFactory } from './tab.factory';
     OverviewGuard,
     BrokerConfigurationService,
     { provide: HOOK_NAVIGATOR_NODES, useClass: ConfigurationNavigationFactory, multi: true },
-    { provide: HOOK_TABS, useClass: ConfigurationTabFactory, multi: true },
+    { provide: HOOK_TABS, useClass: ForwarderConfigurationTabFactory, multi: true },
     {
       provide: HOOK_ROUTE,
       useValue: [
         {
-          path: 'mqttforwarder/configuration',
+          path: 'forwarder/configuration',
           component: BokerConfigurationComponent,
         },
       ] as Route[],
