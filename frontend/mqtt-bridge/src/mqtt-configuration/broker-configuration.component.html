@@ -1,5 +1,5 @@
 
-<c8y-title>MQTT Forwarder</c8y-title>
+<c8y-title>REST 2 MQTT Bridge</c8y-title>
 <c8y-action-bar-item [placement]="'right'">
   <button class="btn btn-link" title="{{ 'Refresh' | translate }}" (click)="loadConnectionStatus()">
     <i c8yIcon="refresh"></i>
@@ -11,21 +11,21 @@
     <div class="card card--fullpage">
       <div class="card-header separator j-c-between">
         <h4 class="card-title">
-          {{ 'MQTT Forwarder' | translate }}
+          {{ 'REST 2 MQTT Bridge' | translate }}
         </h4>
         <div class="c8y-realtime">
           <span class="c8y-pulse animated pulse" [ngClass]="{
               active: isBrokerConnected,
               inactive: !isBrokerConnected
             }"></span>
-          {{ 'MQTTBroker connected' | translate }}
+          {{ 'Broker connected' | translate }}
         </div>
         <div class="c8y-realtime">
           <span class="c8y-pulse animated pulse" [ngClass]="{
               active: isBridgeAgentCreated$ | async,
               inactive: !isBridgeAgentCreated$ | async
             }"></span>
-          {{ 'MQTTForwarderAgent registered' | translate }}
+          {{ 'Bridge agent registered' | translate }}
         </div>
       </div>
       <div class="inner-scroll">

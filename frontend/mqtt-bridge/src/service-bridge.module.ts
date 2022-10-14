@@ -15,7 +15,7 @@ import { BrokerConfigurationService } from './mqtt-configuration/broker-configur
 import { TerminateBrokerConnectionModalComponent } from './mqtt-configuration/terminate/terminate-connection-modal.component';
 import { BridgeNavigationFactory } from './navigation.factory';
 import { OverviewGuard } from './shared/overview.guard';
-import { BridgeConfigurationTabFactory } from './tab.factory';
+import { BridgeTabFactory } from './tab.factory';
 
 @NgModule({
   imports: [
@@ -48,7 +48,7 @@ import { BridgeConfigurationTabFactory } from './tab.factory';
     OverviewGuard,
     BrokerConfigurationService,
     { provide: HOOK_NAVIGATOR_NODES, useClass: BridgeNavigationFactory, multi: true },
-    { provide: HOOK_TABS, useClass: BridgeConfigurationTabFactory, multi: true },
+    { provide: HOOK_TABS, useClass: BridgeTabFactory, multi: true },
     {
       provide: HOOK_ROUTE,
       useValue: [
