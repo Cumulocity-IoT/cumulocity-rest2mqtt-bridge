@@ -1,5 +1,5 @@
 {
-  "name": "mqtt-forwarder-ui",
+  "name": "rest2mqtt-ui",
   "version": "1.0.10",
   "description": "This is the Cumulocity module federation plugin to forward rest post request to a mqtt topic.",
 
@@ -47,25 +47,25 @@
   },
   "c8y": {
     "application": {
-      "name": "mqtt-forwarder-ui",
-      "contextPath": "mqtt-forwarder-ui",
-      "key": "mqtt-forwarder-ui-application-key",
-      "globalTitle": "MQTT forwarder widget",
+      "name": "rest2mqtt-ui",
+      "contextPath": "rest2mqtt-ui",
+      "key": "rest2mqtt-ui-application-key",
+      "globalTitle": "REST2MQTT bridge widget",
       "tabsHorizontal": true,
       "isPackage": true,
       "noAppSwitcher": true,
       "package": "plugin",
       "exports": [
         {
-          "name": "MQTT forwarder plugin",
-          "module": "MQTTForwarderModule",
-          "path": "./src/service-forwarder.module",
-          "description": "Adds a MQTT forwarder plugin"
+          "name": "REST2MQTT bridge plugin",
+          "module": "REST2MQTTBridgeModule",
+          "path": "./src/service-bridge.module",
+          "description": "Adds a REST2MQTT bridge plugin"
         }
       ],
       "remotes": {
-        "mqtt-forwarder-ui": [
-          "MQTTForwarderModule"
+        "rest2mqtt-ui": [
+          "REST2MQTTBridgeModule"
         ]
       }
     },

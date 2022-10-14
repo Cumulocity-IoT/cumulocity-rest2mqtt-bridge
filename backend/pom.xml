@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.softwareag.c8y.integration.mqtt</groupId>
-    <artifactId>mqtt.forwarder</artifactId>
-    <version>1.4</version>
+    <artifactId>rest2mqtt.bridge</artifactId>
+    <version>1.7</version>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -104,7 +104,7 @@
                             <goal>package</goal>
                         </goals>
                         <configuration>
-                            <name>mqtt-forwarder</name>
+                            <name>rest2mqtt-bridge</name>
                             <encoding>UTF-8</encoding>
                             <rpmSkip>true</rpmSkip>
                             <containerSkip>false</containerSkip>

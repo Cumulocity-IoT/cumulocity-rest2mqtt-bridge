@@ -15,8 +15,8 @@ import { MQTTAuthentication, ServiceStatus, Status, QOS } from '../shared/config
 })
 export class BokerConfigurationComponent implements OnInit {
 
-  isMQTTConnected: boolean;
-  isMQTTForwarderAgentCreated$: Observable<boolean>;
+  isBrokerConnected: boolean;
+  isBridgeAgentCreated$: Observable<boolean>;
   mqttAgentId$: Observable<string>;
   monitorings$: Observable<ServiceStatus>;
   subscription: object;
@@ -48,9 +48,9 @@ export class BokerConfigurationComponent implements OnInit {
     this.initForm();
     this.initializeMonitoringService();
     this.loadConnectionDetails();
-    this.mqttAgentId$ = from(this.configurationService.initializeMQTTForwarderAgent());
-    this.isMQTTForwarderAgentCreated$ = this.mqttAgentId$.pipe(map(agentId => agentId != null));
-    //console.log("Init configuration, mqttAgent", this.isMQTTForwarderAgentCreated);
+    this.mqttAgentId$ = from(this.configurationService.initializeMQTTBridgeAgent());
+    this.isBridgeAgentCreated$ = this.mqttAgentId$.pipe(map(agentId => agentId != null));
+    //console.log("Init configuration, mqttAgent", this.isMQTTBridgeAgentCreated);
   }
 
 
@@ -58,15 +58,15 @@ export class BokerConfigurationComponent implements OnInit {
     this.subscription = await this.configurationService.subscribeMonitoringChannel();
     this.monitorings$ = this.configurationService.getCurrentServiceStatus();
     this.monitorings$.subscribe(status => {
-      this.isMQTTConnected = (status.status === Status.CONNECTED);
+      this.isBrokerConnected = (status.status === Status.CONNECTED);
     })
   }
 
   async loadConnectionStatus(): Promise<void> {
-    this.isMQTTConnected = false;
+    this.isBrokerConnected = false;
     let status = await this.configurationService.getConnectionStatus();
-    this.isMQTTConnected = (status.status === Status.CONNECTED);
-    console.log("Retrieved status:", status, this.isMQTTConnected)
+    this.isBrokerConnected = (status.status === Status.CONNECTED);
+    console.log("Retrieved status:", status, this.isBrokerConnected)
   }
 
   private initForm(): void {

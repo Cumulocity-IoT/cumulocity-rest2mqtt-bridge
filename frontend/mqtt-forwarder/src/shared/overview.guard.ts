@@ -4,7 +4,7 @@ import { ApplicationService } from '@c8y/client';
 
 @Injectable({ providedIn: 'root' })
 export class OverviewGuard implements CanActivate {
-  private static readonly APPLICATION_MQTT = 'mqtt-forwarder-ui';
+  private static readonly APPLICATION_MQTT = 'mqtt-rest2mqtt-ui';
 
   private activateOverviewNavigationPromise: Promise<boolean>;
 
@@ -16,7 +16,7 @@ export class OverviewGuard implements CanActivate {
         .isAvailable(OverviewGuard.APPLICATION_MQTT)
         .then((result) => {
           if (!(result && result.data)) {
-            console.error('Generic MQTT Forwarder Agent Microservice is not subscribed!');
+            console.error('Generic MQTT Bridge Agent Microservice is not subscribed!');
           }
 
           return result && result.data;

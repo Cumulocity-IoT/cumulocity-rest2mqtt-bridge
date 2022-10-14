@@ -13,9 +13,9 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { BokerConfigurationComponent } from './mqtt-configuration/broker-configuration.component';
 import { BrokerConfigurationService } from './mqtt-configuration/broker-configuration.service';
 import { TerminateBrokerConnectionModalComponent } from './mqtt-configuration/terminate/terminate-connection-modal.component';
-import { ConfigurationNavigationFactory } from './navigation.factory';
+import { BridgeNavigationFactory } from './navigation.factory';
 import { OverviewGuard } from './shared/overview.guard';
-import { ForwarderConfigurationTabFactory } from './tab.factory';
+import { BridgeConfigurationTabFactory } from './tab.factory';
 
 @NgModule({
   imports: [
@@ -26,7 +26,7 @@ import { ForwarderConfigurationTabFactory } from './tab.factory';
     ReactiveFormsModule,
     RouterModule.forChild([
       {
-        path: 'forwarder/configuration',
+        path: 'rest2mqtt/configuration',
         pathMatch: 'full',
         component: BokerConfigurationComponent,
       },
@@ -47,13 +47,13 @@ import { ForwarderConfigurationTabFactory } from './tab.factory';
   providers: [
     OverviewGuard,
     BrokerConfigurationService,
-    { provide: HOOK_NAVIGATOR_NODES, useClass: ConfigurationNavigationFactory, multi: true },
-    { provide: HOOK_TABS, useClass: ForwarderConfigurationTabFactory, multi: true },
+    { provide: HOOK_NAVIGATOR_NODES, useClass: BridgeNavigationFactory, multi: true },
+    { provide: HOOK_TABS, useClass: BridgeConfigurationTabFactory, multi: true },
     {
       provide: HOOK_ROUTE,
       useValue: [
         {
-          path: 'forwarder/configuration',
+          path: 'rest2mqtt/configuration',
           component: BokerConfigurationComponent,
         },
       ] as Route[],
@@ -61,6 +61,6 @@ import { ForwarderConfigurationTabFactory } from './tab.factory';
     },
   ],
 })
-export class MQTTForwarderModule {
+export class MQTTBridgeModule {
   constructor() {}
 }

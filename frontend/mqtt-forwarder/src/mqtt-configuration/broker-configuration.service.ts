@@ -16,7 +16,7 @@ export class BrokerConfigurationService {
   private _currentServiceStatus = this.serviceStatus.asObservable();
   private realtime: Realtime
 
-  async initializeMQTTForwarderAgent(): Promise<string> {
+  async initializeMQTTBridgeAgent(): Promise<string> {
     if (!this.agentId) {
       const identity: IExternalIdentity = {
         type: 'c8y_Serial',
@@ -26,7 +26,7 @@ export class BrokerConfigurationService {
       const { data, res } = await this.identity.detail(identity);
       if (res.status < 300) {
         this.agentId = data.managedObject.id.toString();
-        console.log("MQTTConfigurationService: Found MQTTForwarderAgent", this.agentId);
+        console.log("MQTTConfigurationService: Found MQTTBridgeAgent", this.agentId);
       }
     }
     return this.agentId;
