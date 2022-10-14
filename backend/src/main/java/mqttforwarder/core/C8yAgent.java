@@ -58,8 +58,8 @@ public class C8yAgent {
 
     private ManagedObjectRepresentation agentMOR;
 
-    private final String AGENT_ID = "MQTT_FORWARDER_AGENT";
-    private final String AGENT_NAME = "Generic MQTT Forwarder Agent";
+    private final String AGENT_ID = "MQTT_BRIDGE_AGENT";
+    private final String AGENT_NAME = "REST 2 MQTT Bridge Agent";
 
     public String tenant = null;
 

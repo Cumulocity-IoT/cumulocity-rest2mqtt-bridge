@@ -4,7 +4,7 @@ import { gettext, NavigatorNode, NavigatorNodeFactory } from '@c8y/ngx-component
 
 @Injectable()
 export class BridgeNavigationFactory implements NavigatorNodeFactory {
-  private static readonly APPLICATION_NAME = 'mqtt-rest2mqtt-ui';
+  private static readonly APPLICATION_NAME = 'rest2mqtt-bridge';
 
   private readonly NAVIGATION_NODE_MQTT = new NavigatorNode({
     parent: gettext('Settings'),

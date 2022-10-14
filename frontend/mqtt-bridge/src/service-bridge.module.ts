@@ -61,6 +61,6 @@ import { BridgeConfigurationTabFactory } from './tab.factory';
     },
   ],
 })
-export class MQTTBridgeModule {
+export class REST2MQTTBridgeModule {
   constructor() {}
 }

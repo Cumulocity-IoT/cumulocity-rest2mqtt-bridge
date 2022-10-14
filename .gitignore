@@ -35,8 +35,8 @@ bin/
 
 .DS_Store
 .vscode/settings.json
-frontend/mqtt-forwarder/dist
-frontend/mqtt-forwarder/node_modules
+frontend/mqtt-bridge/dist
+frontend/mqtt-bridge/node_modules
 frontend/.DS_Store
 backend/src/.DS_Store
 backend/src/main/.DS_Store
