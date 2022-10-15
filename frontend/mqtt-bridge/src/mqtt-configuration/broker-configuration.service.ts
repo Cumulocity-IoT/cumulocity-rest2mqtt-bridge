@@ -90,9 +90,6 @@ export class BrokerConfigurationService {
   }
 
   async subscribeMonitoringChannel(): Promise<object> {
-    // if (!this.agentId) {
-    //   await this.initializeMQTTBridgeAgent();
-    // }
     console.log("Started subscription:", this.agentId);
     this.getConnectionStatus().then( status => {
       this.serviceStatus.next(status);

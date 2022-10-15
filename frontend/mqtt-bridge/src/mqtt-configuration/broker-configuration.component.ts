@@ -46,11 +46,9 @@ export class BokerConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    //this.initializeMonitoringService();
     this.loadConnectionDetails();
     this.isMQTTBridgeAgentCreated$ = from(this.configurationService.initializeMQTTBridgeAgent())
             .pipe(map(agentId => agentId != null), tap(() => this.initializeMonitoringService()));
-    //console.log("Init configuration, mqttAgent", this.isMQTTBridgeAgentCreated);
   }
 
 
