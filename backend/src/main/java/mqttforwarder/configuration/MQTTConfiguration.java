@@ -1,6 +1,8 @@
 package mqttforwarder.configuration;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.StringUtils;
+
 import lombok.Data;
 import lombok.ToString;
 import mqttforwarder.model.QOS;
@@ -35,9 +37,25 @@ public class MQTTConfiguration implements Cloneable {
     public QOS qos;
 
 
-    public Object clone() throws CloneNotSupportedException
+    public Object clone() 
     {
-        return super.clone();
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
+    }
+
+    public static boolean isValid (MQTTConfiguration mc){
+        return (mc != null) && !StringUtils.isEmpty(mc.mqttHost) &&
+        !(mc.mqttPort == 0) &&
+        !StringUtils.isEmpty(mc.user) &&
+        !StringUtils.isEmpty(mc.password) &&
+        !StringUtils.isEmpty(mc.clientId);
+    }
+
+    public static boolean isActive(MQTTConfiguration mc) {
+        return MQTTConfiguration.isValid(mc) && mc.active;
     }
 }
 

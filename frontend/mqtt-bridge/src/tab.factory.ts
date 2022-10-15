@@ -7,6 +7,7 @@ export class BridgeTabFactory implements TabFactory {
   constructor(public router: Router) {}
 
   get() {
+    console.log("BridgeTabFactory (1.0.16) ",this.router.url, this.router.url.match(/rest2mqtt/g));
     const tabs: Tab[] = [];
     if (this.router.url.match(/rest2mqtt/g)) {
       tabs.push({

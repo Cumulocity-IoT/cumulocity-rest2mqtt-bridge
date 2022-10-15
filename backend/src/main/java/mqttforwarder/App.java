@@ -1,5 +1,8 @@
 package mqttforwarder;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,12 +21,10 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import lombok.extern.slf4j.Slf4j;
 import mqttforwarder.core.C8yAgent;
 import mqttforwarder.service.MQTTClient;
 import mqttforwarder.service.RFC3339DateFormat;
 
-@Slf4j
 @MicroserviceApplication
 @EnableContextSupport
 @SpringBootApplication
@@ -45,10 +46,11 @@ public class App {
         return executor;
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+    @Bean("cachedThreadPool")
+    public ExecutorService cachedThreadPool() {
+        return Executors.newCachedThreadPool();
     }
-
+    
     @Bean
     @Primary
     public ObjectMapper objectMapper() {
@@ -61,9 +63,13 @@ public class App {
         objectMapper.setDateFormat(new RFC3339DateFormat());
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.registerModule(new JodaModule());
-
+        
         SimpleModule module = new SimpleModule();
         objectMapper.registerModule(module);
         return objectMapper;
     }
+    
+        public static void main(String[] args) {
+            SpringApplication.run(App.class, args);
+        }
 }

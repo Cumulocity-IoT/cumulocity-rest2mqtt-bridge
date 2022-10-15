@@ -51,9 +51,6 @@ public class C8yAgent {
     private MQTTClient mqttClient;
 
     @Autowired
-    private ObjectMapper objectMapper;
-
-    @Autowired
     private ConfigurationService configurationService;
 
     private ManagedObjectRepresentation agentMOR;
@@ -64,7 +61,7 @@ public class C8yAgent {
     public String tenant = null;
 
     @EventListener
-    public void init(MicroserviceSubscriptionAddedEvent event) {
+    public void initialize(MicroserviceSubscriptionAddedEvent event) {
         tenant = event.getCredentials().getTenant();
         log.info("Event received for Tenant {}", tenant);
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Berlin"));
@@ -91,18 +88,18 @@ public class C8yAgent {
                 ExternalIDRepresentation externalAgentId = createExternalID(this.agentMOR, AGENT_ID, "c8y_Serial");
                 log.info("ExternalId created: {}", externalAgentId.getExternalId());
             }
-
         });
 
         try {
-            mqttClient.init();
-            mqttClient.reconnect();
+            mqttClient.submitInitialize();
+            mqttClient.submitConnect();
             mqttClient.runHouskeeping();
         } catch (Exception e) {
             log.error("Error on MQTT Connection: ", e);
-            mqttClient.reconnect();
+            mqttClient.submitConnect();
         }
     }
+
 
     @PreDestroy
     private void stop() {
@@ -185,7 +182,7 @@ public class C8yAgent {
     }
 
 
-    public void sendStatusConfiguration(String type, ServiceStatus serviceStatus) {
+    public void sendStatusService(String type, ServiceStatus serviceStatus) {
         log.debug("Sending status configuration: {}", serviceStatus);
         EventRepresentation[] ers = { new EventRepresentation() };
         subscriptionsService.runForTenant(tenant, () -> {

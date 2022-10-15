@@ -5,7 +5,7 @@ import { AlertService, gettext } from '@c8y/ngx-components';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TerminateBrokerConnectionModalComponent } from './terminate/terminate-connection-modal.component';
 import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { MQTTAuthentication, ServiceStatus, Status, QOS } from '../shared/configuration.model';
 
 
@@ -16,8 +16,8 @@ import { MQTTAuthentication, ServiceStatus, Status, QOS } from '../shared/config
 export class BokerConfigurationComponent implements OnInit {
 
   isBrokerConnected: boolean;
-  isBridgeAgentCreated$: Observable<boolean>;
-  mqttAgentId$: Observable<string>;
+  isBrokerActivated: boolean;
+  isMQTTBridgeAgentCreated$: Observable<boolean>;
   monitorings$: Observable<ServiceStatus>;
   subscription: object;
   mqttForm: FormGroup;
@@ -46,10 +46,10 @@ export class BokerConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.initializeMonitoringService();
+    //this.initializeMonitoringService();
     this.loadConnectionDetails();
-    this.mqttAgentId$ = from(this.configurationService.initializeMQTTBridgeAgent());
-    this.isBridgeAgentCreated$ = this.mqttAgentId$.pipe(map(agentId => agentId != null));
+    this.isMQTTBridgeAgentCreated$ = from(this.configurationService.initializeMQTTBridgeAgent())
+            .pipe(map(agentId => agentId != null), tap(() => this.initializeMonitoringService()));
     //console.log("Init configuration, mqttAgent", this.isMQTTBridgeAgentCreated);
   }
 
@@ -59,6 +59,7 @@ export class BokerConfigurationComponent implements OnInit {
     this.monitorings$ = this.configurationService.getCurrentServiceStatus();
     this.monitorings$.subscribe(status => {
       this.isBrokerConnected = (status.status === Status.CONNECTED);
+      this.isBrokerActivated = (status.status === Status.ACTIVATED || status.status === Status.CONNECTED);
     })
   }
 
@@ -66,6 +67,7 @@ export class BokerConfigurationComponent implements OnInit {
     this.isBrokerConnected = false;
     let status = await this.configurationService.getConnectionStatus();
     this.isBrokerConnected = (status.status === Status.CONNECTED);
+    this.isBrokerActivated = (status.status === Status.ACTIVATED || status.status === Status.CONNECTED);
     console.log("Retrieved status:", status, this.isBrokerConnected)
   }
 
@@ -77,6 +79,7 @@ export class BokerConfigurationComponent implements OnInit {
       password: new FormControl('', Validators.required),
       clientId: new FormControl('', Validators.required),
       useTLS: new FormControl('', Validators.required),
+      active: new FormControl('', Validators.required),
       qos: new FormControl('', Validators.required),
     });
   }
