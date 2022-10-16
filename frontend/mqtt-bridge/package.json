@@ -1,6 +1,6 @@
 {
   "name": "rest2mqtt-ui",
-  "version": "1.0.16",
+  "version": "1.0.18",
   "description": "This is the Cumulocity plugin to forward REST POST request to a MQTT topic.",
 
   "scripts": {

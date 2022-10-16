@@ -16,4 +16,5 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   ],
   bootstrap: [BootstrapComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

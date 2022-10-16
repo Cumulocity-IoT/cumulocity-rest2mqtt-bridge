@@ -5,8 +5,9 @@ import { AlertService, gettext } from '@c8y/ngx-components';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TerminateBrokerConnectionModalComponent } from './terminate/terminate-connection-modal.component';
 import { from, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { MQTTAuthentication, ServiceStatus, Status, QOS } from '../shared/configuration.model';
+import packageJson from '../../package.json';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { MQTTAuthentication, ServiceStatus, Status, QOS } from '../shared/config
 })
 export class BokerConfigurationComponent implements OnInit {
 
+  version: string = packageJson.version;
   isBrokerConnected: boolean;
   isBrokerActivated: boolean;
   isMQTTBridgeAgentCreated$: Observable<boolean>;
@@ -45,10 +47,11 @@ export class BokerConfigurationComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("Running version", this.version);
     this.initForm();
     this.loadConnectionDetails();
     this.isMQTTBridgeAgentCreated$ = from(this.configurationService.initializeMQTTBridgeAgent())
-            .pipe(map(agentId => agentId != null), tap(() => this.initializeMonitoringService()));
+            .pipe(map(agentId => agentId != null));
   }
 
 

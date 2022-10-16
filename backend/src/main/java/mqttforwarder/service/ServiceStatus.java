@@ -3,13 +3,6 @@ package mqttforwarder.service;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-enum Status {
-    CONNECTED,
-    ACTIVATED,
-    CONFIGURED,
-    NOT_READY
-}
-
 @Data
 @AllArgsConstructor
 public class ServiceStatus {

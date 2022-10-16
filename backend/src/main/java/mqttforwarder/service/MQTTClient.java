@@ -170,11 +170,13 @@ public class MQTTClient {
     public void disconnectFromBroker() {
         mqttConfiguration = c8yAgent.setConfigurationActive(false);
         disconnect();
+        sendStatusService();
     }
 
     public void connectToBroker() {
         mqttConfiguration = c8yAgent.setConfigurationActive(true);
         submitConnect();
+        sendStatusService();
     }
 
     public void subscribe(String topic, Integer qos) throws MqttException {

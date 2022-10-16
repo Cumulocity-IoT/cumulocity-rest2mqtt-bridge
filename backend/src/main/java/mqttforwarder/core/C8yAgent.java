@@ -1,10 +1,11 @@
 package mqttforwarder.core;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 import javax.annotation.PreDestroy;
 
-import org.eclipse.paho.client.mqttv3.MqttException;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -22,7 +23,6 @@ import com.cumulocity.sdk.client.event.EventApi;
 import com.cumulocity.sdk.client.identity.IdentityApi;
 import com.cumulocity.sdk.client.inventory.InventoryApi;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import c8y.IsDevice;
 import lombok.extern.slf4j.Slf4j;
@@ -55,10 +55,10 @@ public class C8yAgent {
 
     private ManagedObjectRepresentation agentMOR;
 
-    private final String AGENT_ID = "MQTT_BRIDGE_AGENT";
-    private final String AGENT_NAME = "REST 2 MQTT Bridge Agent";
+    private final String AGENT_ID = "MQTT_BRIDGE_SERVICE";
+    private final String AGENT_NAME = "REST 2 MQTT Bridge Service";
 
-    public String tenant = null;
+    public String tenant;
 
     @EventListener
     public void initialize(MicroserviceSubscriptionAddedEvent event) {
@@ -76,7 +76,7 @@ public class C8yAgent {
                 log.error(e.getMessage());
             }
             if (agentIdRep != null) {
-                log.info("Agent with ID {} already exists {}", AGENT_ID, agentIdRep);
+                log.info("Agent with id {} already exists {}", AGENT_ID, agentIdRep);
                 this.agentMOR = agentIdRep.getManagedObject();
             } else {
                 ManagedObjectRepresentation agent = new ManagedObjectRepresentation();
@@ -184,14 +184,15 @@ public class C8yAgent {
 
     public void sendStatusService(String type, ServiceStatus serviceStatus) {
         log.debug("Sending status configuration: {}", serviceStatus);
-        EventRepresentation[] ers = { new EventRepresentation() };
+        // EventRepresentation[] ers = { new EventRepresentation() };
         subscriptionsService.runForTenant(tenant, () -> {
-            ers[0].setSource(agentMOR);
-            ers[0].setText("New status configuration:" + System.currentTimeMillis());
-            ers[0].setDateTime(DateTime.now());
-            ers[0].setType(type);
-            ers[0].setProperty("status", serviceStatus);
-            this.eventApi.createAsync(ers[0]);
+            Map <String, String> entry = Map.of("service", serviceStatus.getStatus().name() );
+            Map<String, Object> service = new HashMap<String,Object>();
+            service.put("service_status", entry);
+            ManagedObjectRepresentation update = new ManagedObjectRepresentation();
+            update.setId(agentMOR.getId());
+            update.setAttrs(service);
+            this.inventoryApi.update(update);
         });
     }
 

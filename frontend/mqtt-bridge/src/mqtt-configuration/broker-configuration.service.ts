@@ -26,7 +26,7 @@ export class BrokerConfigurationService {
       const { data, res } = await this.identity.detail(identity);
       if (res.status < 300) {
         this.agentId = data.managedObject.id.toString();
-        console.log("MQTTConfigurationService: Found MQTTBridgeAgent", this.agentId);
+        console.log("BrokerConfigurationService: Found MQTT Bridge Service", this.agentId);
       }
     }
     return this.agentId;
@@ -90,11 +90,12 @@ export class BrokerConfigurationService {
   }
 
   async subscribeMonitoringChannel(): Promise<object> {
-    console.log("Started subscription:", this.agentId);
+    this.agentId = await this.initializeMQTTBridgeAgent();
+    console.log("Start subscription for monitoring:", this.agentId);
     this.getConnectionStatus().then( status => {
       this.serviceStatus.next(status);
     })
-    return this.realtime.subscribe(`/events/${this.agentId}`, this.updateStatus.bind(this));
+    return this.realtime.subscribe(`/managedobjects/${this.agentId}`, this.updateStatus.bind(this));
   }
 
   unsubscribeFromMonitoringChannel(subscription: object): object {
@@ -103,11 +104,8 @@ export class BrokerConfigurationService {
 
   private updateStatus(p: object): void {
     let payload = p['data']['data'];
-    //console.log("New generig event:", payload);
-    if (payload.type == STATUS_SERVICE_EVENT_TYPE) {
-      let status: ServiceStatus = payload['status'];
-      this.serviceStatus.next(status);
-      console.log("New monitoring event", status);
-    }
+    let status: ServiceStatus = payload['service_status'];
+    this.serviceStatus.next(status);
+    //console.log("New monitoring event", status);
   }
 }
