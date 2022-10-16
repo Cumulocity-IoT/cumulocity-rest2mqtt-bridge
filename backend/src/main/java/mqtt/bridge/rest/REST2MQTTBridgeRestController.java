@@ -1,4 +1,4 @@
-package mqttforwarder.rest;
+package mqtt.bridge.rest;
 
 import java.util.Map;
 
@@ -18,15 +18,15 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import lombok.extern.slf4j.Slf4j;
-import mqttforwarder.configuration.MQTTConfiguration;
-import mqttforwarder.core.C8yAgent;
-import mqttforwarder.service.MQTTClient;
-import mqttforwarder.service.ServiceOperation;
-import mqttforwarder.service.ServiceStatus;
+import mqtt.bridge.configuration.MQTTConfiguration;
+import mqtt.bridge.core.C8yAgent;
+import mqtt.bridge.service.MQTTClient;
+import mqtt.bridge.service.ServiceOperation;
+import mqtt.bridge.service.ServiceStatus;
 
 @Slf4j
 @RestController
-public class MQTTForwarderRestController {
+public class REST2MQTTBridgeRestController {
 
     @Autowired
     MQTTClient mqttClient;

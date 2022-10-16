@@ -1,4 +1,4 @@
-package mqttforwarder.service;
+package mqtt.bridge.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

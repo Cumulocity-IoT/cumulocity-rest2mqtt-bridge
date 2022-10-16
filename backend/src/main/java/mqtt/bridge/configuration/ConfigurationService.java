@@ -1,4 +1,4 @@
-package mqttforwarder.configuration;
+package mqtt.bridge.configuration;
 
 import com.cumulocity.model.option.OptionPK;
 import com.cumulocity.rest.representation.tenant.OptionRepresentation;

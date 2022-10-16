@@ -1,4 +1,4 @@
-package mqttforwarder.model;
+package mqtt.bridge.model;
 
 public enum QOS {
   AT_MOST_ONCE,

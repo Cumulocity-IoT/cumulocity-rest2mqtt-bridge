@@ -1,4 +1,4 @@
-package mqttforwarder.service;
+package mqtt.bridge.service;
 
 public enum Status {
     CONNECTED,

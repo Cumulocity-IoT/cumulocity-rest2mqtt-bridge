@@ -1,4 +1,4 @@
-package mqttforwarder;
+package mqtt.bridge;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,9 +21,9 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import mqttforwarder.core.C8yAgent;
-import mqttforwarder.service.MQTTClient;
-import mqttforwarder.service.RFC3339DateFormat;
+import mqtt.bridge.core.C8yAgent;
+import mqtt.bridge.service.MQTTClient;
+import mqtt.bridge.service.RFC3339DateFormat;
 
 @MicroserviceApplication
 @EnableContextSupport

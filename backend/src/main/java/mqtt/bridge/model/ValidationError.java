@@ -1,4 +1,4 @@
-package mqttforwarder.model;
+package mqtt.bridge.model;
 
 public enum ValidationError {
   Only_One_Multi_Level_Wildcard,

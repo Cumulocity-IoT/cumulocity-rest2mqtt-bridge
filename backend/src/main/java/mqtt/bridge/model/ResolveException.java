@@ -1,4 +1,4 @@
-package mqttforwarder.model;
+package mqtt.bridge.model;
 
 public class ResolveException extends Exception {
 

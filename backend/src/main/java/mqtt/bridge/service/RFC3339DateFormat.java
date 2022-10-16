@@ -1,4 +1,4 @@
-package mqttforwarder.service;
+package mqtt.bridge.service;
 
 import com.fasterxml.jackson.databind.util.StdDateFormat;
 

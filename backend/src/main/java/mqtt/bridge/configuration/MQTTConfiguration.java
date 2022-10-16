@@ -1,11 +1,11 @@
-package mqttforwarder.configuration;
+package mqtt.bridge.configuration;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
 
 import lombok.Data;
 import lombok.ToString;
-import mqttforwarder.model.QOS;
+import mqtt.bridge.model.QOS;
 
 @Data
 @ToString ()

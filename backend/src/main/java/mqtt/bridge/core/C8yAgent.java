@@ -1,4 +1,4 @@
-package mqttforwarder.core;
+package mqtt.bridge.core;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,10 +26,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import c8y.IsDevice;
 import lombok.extern.slf4j.Slf4j;
-import mqttforwarder.configuration.ConfigurationService;
-import mqttforwarder.configuration.MQTTConfiguration;
-import mqttforwarder.service.MQTTClient;
-import mqttforwarder.service.ServiceStatus;
+import mqtt.bridge.configuration.ConfigurationService;
+import mqtt.bridge.configuration.MQTTConfiguration;
+import mqtt.bridge.service.MQTTClient;
+import mqtt.bridge.service.ServiceStatus;
 
 @Slf4j
 @Service
