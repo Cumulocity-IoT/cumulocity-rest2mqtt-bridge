@@ -50,6 +50,7 @@ export class BokerConfigurationComponent implements OnInit {
     console.log("Running version", this.version);
     this.initForm();
     this.loadConnectionDetails();
+    this.initializeMonitoringService();
     this.isMQTTBridgeAgentCreated$ = from(this.configurationService.initializeMQTTBridgeAgent())
             .pipe(map(agentId => agentId != null));
   }
