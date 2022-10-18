@@ -64,7 +64,7 @@ public class REST2MQTTBridgeRestController {
 
     @RequestMapping(value = "/connection", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MQTTConfiguration> getConnectionDetails() {
-        log.info("Get connection details");
+        log.info("Get connection details ...");
         try {
             final MQTTConfiguration configuration = mqttClient.getConnectionDetails();
             if (configuration == null) {
@@ -73,6 +73,7 @@ public class REST2MQTTBridgeRestController {
             // don't modify original copy
             MQTTConfiguration configurationClone = (MQTTConfiguration) configuration.clone();
             configurationClone.setPassword("");
+            log.info("Get connection details: {}", configurationClone);
             return new ResponseEntity<MQTTConfiguration>(configurationClone, HttpStatus.OK);
         } catch (Exception ex) {
             log.error("Error on loading configuration {}", ex);

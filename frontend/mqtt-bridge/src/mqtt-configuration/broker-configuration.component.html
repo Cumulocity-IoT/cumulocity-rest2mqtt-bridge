@@ -102,6 +102,16 @@
                 </div>
               </div>
             </c8y-form-group>
+            <c8y-form-group>
+              <label class="" translate>QOS</label>
+              <div class="c8y-select-wrapper">
+                <select class="form-control" formControlName="qos" [(ngModel)]="configuration.qos" #qosRef>
+                  <option *ngFor="let q of QOS | keyvalue" [ngValue]="q.key">
+                    {{q.value}}
+                  </option>
+                </select>
+              </div>
+            </c8y-form-group>
           </div>
         </div>
         <div class="card-footer separator">

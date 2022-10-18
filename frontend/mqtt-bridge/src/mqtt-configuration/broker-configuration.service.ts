@@ -73,8 +73,8 @@ export class BrokerConfigurationService {
     if (response.status != 200) {
       return undefined;
     }
-
-    return (await response.json()) as MQTTAuthentication;
+    let res = await response.json();
+    return (res) as MQTTAuthentication;
   }
 
   async getConnectionStatus(): Promise<ServiceStatus> {

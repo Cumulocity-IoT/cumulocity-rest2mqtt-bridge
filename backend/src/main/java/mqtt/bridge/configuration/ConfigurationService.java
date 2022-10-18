@@ -48,7 +48,7 @@ public class ConfigurationService {
         option.setKey(OPTION_KEY_CONFIGURATION);
         try {
             final OptionRepresentation optionRepresentation = tenantOptionApi.getOption(option);
-            final MQTTConfiguration configuration = new ObjectMapper().readValue(optionRepresentation.getValue(), MQTTConfiguration.class);
+            final MQTTConfiguration configuration = objectMapper.readValue(optionRepresentation.getValue(), MQTTConfiguration.class);
             log.info("Returning configuration found: {}:", configuration.mqttHost );
             return configuration;
         } catch (SDKException exception) {
@@ -76,10 +76,10 @@ public class ConfigurationService {
         option.setKey(OPTION_KEY_CONFIGURATION);
         try {
             final OptionRepresentation optionRepresentation = tenantOptionApi.getOption(option);
-            final MQTTConfiguration configuration = new ObjectMapper().readValue(optionRepresentation.getValue(), MQTTConfiguration.class);
+            final MQTTConfiguration configuration = objectMapper.readValue(optionRepresentation.getValue(), MQTTConfiguration.class);
             configuration.active = active;
             log.info("Setting connection: {}:", configuration.active );
-            final String configurationJson = new ObjectMapper().writeValueAsString(configuration);
+            final String configurationJson = objectMapper.writeValueAsString(configuration);
             optionRepresentation.setCategory(OPTION_CATEGORY_CONFIGURATION);
             optionRepresentation.setKey(OPTION_KEY_CONFIGURATION);
             optionRepresentation.setValue(configurationJson);
