@@ -1,11 +1,9 @@
-
 export enum Status {
   CONNECTED = "CONNECTED",
-  ACTIVATED = "ACTIVATED",
+  ENABLED = "ENABLED",
   CONFIGURED = "CONFIGURED",
   NOT_READY = "NOT_READY"
 }
-
 
 export enum QOS {
   AT_MOST_ONCE = "AT_MOST_ONCE",
@@ -13,17 +11,29 @@ export enum QOS {
   EXACTLY_ONCE = "EXACTLY_ONCE",
 }
 
-export interface MQTTAuthentication {
+export interface ConnectionConfiguration {
   mqttHost: string;
   mqttPort: number;
   user: string;
   password: string;
   clientId: string;
   useTLS: boolean;
-  active: boolean;
+  enabled: boolean;
   qos: QOS;
+  useSelfSignedCertificate: boolean;
+  fingerprintSelfSignedCertificate: string;
+  nameCertificate: string;
+}
+
+export interface ServiceConfiguration {
+  logPayload: boolean;
 }
 
 export interface ServiceStatus {
   status: Status;
+}
+
+export enum Operation {
+  CONNECT,
+  DISCONNECT
 }

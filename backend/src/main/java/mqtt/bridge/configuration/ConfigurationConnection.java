@@ -9,7 +9,7 @@ import mqtt.bridge.model.QOS;
 
 @Data
 @ToString ()
-public class MQTTConfiguration implements Cloneable {
+public class ConfigurationConnection implements Cloneable {
 
     @NotNull
     public String mqttHost;
@@ -31,10 +31,18 @@ public class MQTTConfiguration implements Cloneable {
     public boolean useTLS;
 
     @NotNull
-    public boolean active;
+    public boolean enabled;
 
     @NotNull
     public QOS qos;
+
+    @NotNull
+    public boolean useSelfSignedCertificate;
+
+    public String fingerprintSelfSignedCertificate;
+
+    @NotNull
+    public String nameCertificate;
 
 
     public Object clone() 
@@ -46,7 +54,7 @@ public class MQTTConfiguration implements Cloneable {
         }
     }
 
-    public static boolean isValid (MQTTConfiguration mc){
+    public static boolean isValid (ConfigurationConnection mc){
         return (mc != null) && !StringUtils.isEmpty(mc.mqttHost) &&
         !(mc.mqttPort == 0) &&
         !StringUtils.isEmpty(mc.user) &&
@@ -54,8 +62,8 @@ public class MQTTConfiguration implements Cloneable {
         !StringUtils.isEmpty(mc.clientId);
     }
 
-    public static boolean isActive(MQTTConfiguration mc) {
-        return MQTTConfiguration.isValid(mc) && mc.active;
+    public static boolean isEnabled(ConfigurationConnection mc) {
+        return ConfigurationConnection.isValid(mc) && mc.enabled;
     }
 }
 
