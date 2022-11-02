@@ -39,7 +39,6 @@ export class BokerConfigurationComponent implements OnInit {
   };
   serviceConfiguration: ServiceConfiguration = {
     logPayload: true,
-    logSubstitution: true,
   };
 
   QOS = QOS;
@@ -95,7 +94,6 @@ export class BokerConfigurationComponent implements OnInit {
     });
     this.serviceForm = new FormGroup({
       logPayload: new FormControl(''),
-      logSubstitution: new FormControl(''),
     });
   }
 
