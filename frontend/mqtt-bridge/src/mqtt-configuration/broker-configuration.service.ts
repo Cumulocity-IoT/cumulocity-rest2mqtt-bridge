@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FetchClient, IdentityService, IExternalIdentity, IFetchResponse, Realtime } from '@c8y/client';
-import { AGENT_ID, BASE_URL, PATH_CONFIGURATION_CONNECTION_ENDPOINT, PATH_CONFIGURATION_SERVICE_ENDPOINT, PATH_OPERATION_ENDPOINT, PATH_STATUS_ENDPOINT, 
- } from '../shared/helper';
+import {
+  AGENT_ID, BASE_URL, PATH_CONFIGURATION_CONNECTION_ENDPOINT, PATH_CONFIGURATION_SERVICE_ENDPOINT, PATH_OPERATION_ENDPOINT, PATH_STATUS_ENDPOINT,
+} from '../shared/helper';
 import { ConnectionConfiguration, Operation, ServiceConfiguration, ServiceStatus, Status } from '../shared/configuration.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -24,10 +25,15 @@ export class BrokerConfigurationService {
         externalId: AGENT_ID
       };
 
-      const { data, res } = await this.identity.detail(identity);
-      if (res.status < 300) {
-        this.agentId = data.managedObject.id.toString();
-        console.log("BrokerConfigurationService: Found MQTT Bridge Service", this.agentId);
+      try {
+        const { data, res } = await this.identity.detail(identity);
+        if (res.status < 300) {
+          this.agentId = data.managedObject.id.toString();
+          console.log("BrokerConfigurationService: Found MQTT Bridge Service", this.agentId);
+        }
+      } catch (error) {
+        console.log("BrokerConfigurationService: Not found MQTT Bridge Service", error);
+        return "";
       }
     }
     return this.agentId;
@@ -98,7 +104,7 @@ export class BrokerConfigurationService {
   async subscribeMonitoringChannel(): Promise<object> {
     this.agentId = await this.initializeMQTTBridgeAgent();
     console.log("Start subscription for monitoring:", this.agentId);
-    this.getConnectionStatus().then( status => {
+    this.getConnectionStatus().then(status => {
       this.serviceStatus.next(status);
     })
     return this.realtime.subscribe(`/managedobjects/${this.agentId}`, this.updateStatus.bind(this));

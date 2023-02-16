@@ -5,7 +5,7 @@
 
   "scripts": {
     "start": "c8ycli server",
-    "start:admin": "npm start -- --shell administration",
+    "start:admin": "npm start -- --shell administration-1016",
     "build": "c8ycli build",
     "deploy": "c8ycli deploy --password ${password} --user ${user}",
     "postinstall": "ngcc"

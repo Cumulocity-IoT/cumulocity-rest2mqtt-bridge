@@ -16,6 +16,7 @@ import { TerminateBrokerConnectionModalComponent } from './mqtt-configuration/te
 import { BridgeNavigationFactory } from './navigation.factory';
 import { OverviewGuard } from './shared/overview.guard';
 import { BridgeTabFactory } from './tab.factory';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { BridgeTabFactory } from './tab.factory';
     FormsModule,
     PopoverModule,
     ReactiveFormsModule,
+    ModalModule.forRoot(),
     RouterModule.forChild([
       {
         path: 'rest2mqtt/configuration',
